@@ -79,7 +79,7 @@ const ARModel = ({ avgIntensity, lightX, lightY }) => {
         >
             <spotLight position={[lightX, lightY, 5]} intensity={adjustedIntensity}></spotLight>
             <Environment preset='city' />
-            <ARCamRig cameraCoordinates={[position[0],position[1],position[2]+20]} rotation={rot}>
+            <ARCamRig cameraCoordinates={[position[0]*1000,position[1]*1000,position[2]*1000+20]} rotation={rot}>
                 <Center>
                     <Chair />
                 </Center>

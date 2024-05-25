@@ -13,7 +13,7 @@ const ARCamRig = ({ children, cameraCoordinates }) => {
         easing.damp3(state.camera.position, targetPosition, 0.25, delta);
         easing.dampE(
           group.current.rotation,
-          [state.pointer.y / 2, -state.pointer.x / 0.8, 0],
+          [state.pointer.y / 6, -state.pointer.x / 0.8, 0],
           0.25,
           delta
         )

@@ -10,7 +10,12 @@ const AugmentedView = () => {
     const [avgIntensity, setAvgIntensity] = useState(1);
     const [lightX, setLightX] = useState(0);
     const [lightY, setLightY] = useState(0);
-
+    const [modelSize, setModelSize] = useState(20);
+    function getValue(event) {
+        const value = event.target.value;
+        setModelSize(value);
+        console.log(value);
+    }
     useEffect(() => {
         const enableCamera = async () => {
             try {
@@ -94,29 +99,36 @@ const AugmentedView = () => {
     }, [isCameraEnabled]);
 
     return (
-        <div className='cam-window position-relative col-lg-8 col-md-8 col-sm-8 w-100' style={{ height: '445px' }}>
-            <video
-                ref={videoRef}
-                className='position-absolute w-100 h-100'
-                style={{ top: 0, left: 0, objectFit: 'cover', overflow: 'hidden' }}
-            />
 
-            <canvas
-                ref={canvasRef}
-                style={{ display: 'none' }}
-                width={640}
-                height={480}
-            />
-            <Draggable>
-                <div className='h-100'>
-                    <ARModel avgIntensity={avgIntensity} lightX={lightX} lightY={lightY} />
-                </div>
-            </Draggable>
+        <>
+            <div className='cam-window position-relative col-lg-8 col-md-8 col-sm-8 w-100' style={{ height: '445px', overflow:'hidden' }}>
+                <video
+                    ref={videoRef}
+                    className='position-absolute w-100 h-100'
+                    style={{ top: 0, left: 0, objectFit: 'cover', overflow: 'hidden' }}
+                />
+
+                <canvas
+                    ref={canvasRef}
+                    style={{ display: 'none' }}
+                    width={640}
+                    height={480}
+                />
+                <Draggable>
+                    <div className='h-100'>
+                        <ARModel avgIntensity={avgIntensity} lightX={lightX} lightY={lightY} modelSize={modelSize} />
+                    </div>
+                </Draggable>
 
 
 
+            </div>
+            <form>
+                <label htmlFor="customRange1" className="form-label">Near</label>
+                <input type="range" className="form-range" onChange={getValue} id="customRange1" />
+            </form>
+        </>
 
-        </div>
     );
 };
 

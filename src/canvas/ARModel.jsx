@@ -5,7 +5,7 @@ import { Environment, Center } from '@react-three/drei';
 import Chair from './Chair';
 import ARCamRig from './ARCamRig';
 
-const ARModel = ({ avgIntensity, lightX, lightY }) => {
+const ARModel = ({ avgIntensity, lightX, lightY ,modelSize}) => {
     const adjustedIntensity = avgIntensity / 12; // Normalize intensity to range 0-1
     
     return (
@@ -17,7 +17,7 @@ const ARModel = ({ avgIntensity, lightX, lightY }) => {
         >
             <spotLight position={[lightX, lightY, 5]} intensity={adjustedIntensity}></spotLight>
             <Environment preset='city' />
-            <ARCamRig cameraCoordinates={[0,0,20]} >
+            <ARCamRig cameraCoordinates={[0,0,modelSize]} >
                 <Center>
                     <Chair />
                 </Center>

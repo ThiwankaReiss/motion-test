@@ -74,11 +74,12 @@ const ARModel = ({ avgIntensity, lightX, lightY }) => {
             });
         }
     }
+    // position: [0+(position[0]*1000), 0+(position[1]*1000), 0+(position[2]*1000)]
 
     return (
         <Canvas
             shadows
-            camera={{ position: [0+(position[0]*1000), 0+(position[1]*1000), 0+(position[2]*1000)], fov: 20 }}
+            camera={{ position: [0,0,0], fov: 20 }}
             gl={{ preserveDrawingBuffer: true }}
         >
             <spotLight position={[lightX, lightY, 5]} intensity={adjustedIntensity}></spotLight>

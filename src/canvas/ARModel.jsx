@@ -87,7 +87,7 @@ const ARModel = ({ avgIntensity, lightX, lightY }) => {
 
             <Environment preset='city' />
 
-            <ARCamRig cameraCordinates={[0, 0, 20]}>
+            <ARCamRig cameraCordinates={[0+(position[0]*1000), 0+(position[1]*1000), 20+(position[2]*1000)]}>
                 <Center>
                     <Chair />
                 </Center>

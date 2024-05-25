@@ -85,7 +85,7 @@ const AugmentedView = () => {
             <video
                 ref={videoRef}
                 className='position-absolute w-100 h-100'
-                style={{ top: 0, left: 0, objectFit: 'cover' }}
+                style={{ top: 0, left: 0, objectFit: 'cover' ,overflow :'hidden'}}
             />
             <canvas
                 ref={canvasRef}

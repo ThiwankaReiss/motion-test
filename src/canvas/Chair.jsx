@@ -15,7 +15,7 @@ const Chair = () => {
              material-roughness={1}
              dispose={null}
              rotation={[0, 0, 0]}
-             position={[0, 0, -20]}
+             position={[0, 0, 0]}
              scale={[1,0.2,1]}
             ></mesh>
             <mesh
@@ -25,7 +25,7 @@ const Chair = () => {
              material-roughness={1}
              dispose={null}
              rotation={[0, 0, 0]}
-             position={[0, 0, -20]}
+             position={[0, 0, 0]}
              scale={[1,0.05,1]}
             ></mesh>
         </group>

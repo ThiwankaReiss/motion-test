@@ -7,8 +7,8 @@ import ARCamRig from './ARCamRig';
 
 const ARModel = ({ avgIntensity, lightX, lightY }) => {
     const adjustedIntensity = avgIntensity / 12; // Normalize intensity to range 0-1
-    const [position, setPosition] = useState([0, 0, 0]);
-    const [rot, setRotation] = useState([0, 0, 0]);
+    const [position, setPosition] = useState([0, 0, 20]);
+    const [rot, setRotation] = useState([0, 0,0]);
 
     useEffect(() => {
         const requestPermissions = async () => {

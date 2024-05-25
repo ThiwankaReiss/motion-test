@@ -72,6 +72,8 @@ const ARModel = ({ avgIntensity, lightX, lightY }) => {
     };
 
     return (
+        
+        <>
         <Canvas
             shadows
             camera={{ position: [0, 0, 0], fov: 20 }}
@@ -85,6 +87,12 @@ const ARModel = ({ avgIntensity, lightX, lightY }) => {
                 </Center>
             </ARCamRig>
         </Canvas>
+        <div>
+            <p>
+              {position[0]*1000} , {position[1]*1000},{position[2]*1000+20}, {rot}
+            </p>
+        </div>
+        </>
     );
 };
 

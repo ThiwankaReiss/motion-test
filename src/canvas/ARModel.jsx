@@ -7,7 +7,7 @@ import ARCamRig from './ARCamRig';
 
 const ARModel = ({ avgIntensity, lightX, lightY }) => {
     const adjustedIntensity = avgIntensity / 12; // Normalize intensity to range 0-1
-    const [position, setPosition] = useState([0, 0, 20]);
+    const [position, setPosition] = useState([0, 0, 0]);
     const [rot, setRotation] = useState([0, 0,0]);
 
     useEffect(() => {
@@ -64,7 +64,7 @@ const ARModel = ({ avgIntensity, lightX, lightY }) => {
                 const newPosition = [
                     prevPosition[0] + acceleration.x * deltaTime ** 2 / 2,
                     prevPosition[1] + acceleration.y * deltaTime ** 2 / 2,
-                    prevPosition[2] + acceleration.z * deltaTime ** 2 / 2
+                    20+prevPosition[2] + acceleration.z * deltaTime ** 2 / 2
                 ];
                 return newPosition;
             });

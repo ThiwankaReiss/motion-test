@@ -13,14 +13,26 @@ const AugmentedView = () => {
     useEffect(() => {
         const enableCamera = async () => {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                // Attempt to use the back camera
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
                 if (videoRef.current) {
                     videoRef.current.srcObject = stream;
                     videoRef.current.play();
                     setIsCameraEnabled(true);
                 }
             } catch (error) {
-                console.error('Error accessing the camera', error);
+                console.error('Error accessing the back camera, trying the front camera', error);
+                try {
+                    // Fall back to the front camera if the back camera is not available
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                    if (videoRef.current) {
+                        videoRef.current.srcObject = stream;
+                        videoRef.current.play();
+                        setIsCameraEnabled(true);
+                    }
+                } catch (error) {
+                    console.error('Error accessing the front camera', error);
+                }
             }
         };
 
@@ -85,7 +97,7 @@ const AugmentedView = () => {
             <video
                 ref={videoRef}
                 className='position-absolute w-100 h-100'
-                style={{ top: 0, left: 0, objectFit: 'cover' ,overflow :'hidden'}}
+                style={{ top: 0, left: 0, objectFit: 'cover', overflow: 'hidden' }}
             />
             <canvas
                 ref={canvasRef}

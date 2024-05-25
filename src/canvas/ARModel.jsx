@@ -89,7 +89,7 @@ const ARModel = ({ avgIntensity, lightX, lightY }) => {
         </Canvas>
         <div>
             <p>
-              {position[0]*1000} , {position[1]*1000},{position[2]*1000+20}, {rot}
+              {position[0]*1000} , {position[1]*1000-1},{position[2]*1000+20}, {rot}
             </p>
         </div>
         </>

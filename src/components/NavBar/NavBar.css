@@ -1,0 +1,43 @@
+.nav-link.un-selected-txt{
+    color: rgba(255, 255, 255, 0.489) !important;
+  }
+  .nav-link.selected-txt{
+    color: rgb(255, 255, 255)  !important;
+    font-weight:500;
+  }
+  
+  .custom-toggler.navbar-toggler {
+    border-color: #fff; /* Change border color */
+  }
+  
+  .custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+  
+  .shadow-bellow{
+    height: 10px;
+    border-radius: 50%;
+    background-image: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 253, 0.25), rgb(255, 255, 255,0.125));
+    box-shadow:  0px 0px 3px 3px  rgba(255, 255, 253, 0.125);
+  }
+  .itm-link {
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+    min-width: 85px;
+    text-align: center;
+  }
+  .itm-link:hover  {
+    top: -10px;
+  }
+  .add-margins-nav{
+    margin-right: 20%;
+    margin-left: 20%;
+  }
+.nav-bar-color{
+  background-color: blue;
+}
+.change-color{
+  color: red;
+  font-size: large;
+}

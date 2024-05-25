@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Motion = () => {
   const [position, setPosition] = useState([0, 0, 0]);
-  const [pos, setPos]=useState([0,0,0]);
-  const [rot ,setRot]=useState([0,0,0]);
-console.log(position)
+
   useEffect(() => {
     // Check for permissions and request if necessary
     const requestPermissions = async () => {
@@ -50,8 +48,8 @@ console.log(position)
   }, []);
 
   const handleOrientation = (event) => {
+    console.log(event);
     console.log('Orientation:', event.alpha, event.beta, event.gamma);
-    setRot([event.alpha, event.beta, event.gamma]);
   };
 
   const handleMotion = (event) => {
@@ -66,7 +64,6 @@ console.log(position)
           prevPosition[2] + acceleration.z * deltaTime ** 2 / 2
         ];
         console.log('Position:', newPosition);
-        setPos(newPosition);
         return newPosition;
       });
     }
@@ -75,12 +72,7 @@ console.log(position)
   return (
     <div>
       <h1>Device Position</h1>
-      <p>alpha {rot[0]} </p>
-      <p>beta {rot[1]}</p>
-      <p>gamma {rot[2]}</p>
-      <p>x {pos[0]}</p>
-      <p>y {pos[1]}</p>
-      <p>z {pos[2]}</p>
+      <p>Check the console for the device's relative position.</p>
     </div>
   );
 };

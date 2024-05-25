@@ -1,5 +1,5 @@
 {
-  "name": "demo-app",
+  "name": "ar-wood-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,8 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^9.105.6",
+    "@react-three/fiber": "^8.16.6",
+    "aos": "^2.3.4",
+    "axios": "^1.7.2",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "framer-motion": "^11.2.5",
+    "maath": "^0.10.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-color": "^2.19.3",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.5",
+    "react-router-dom": "^6.23.1",
+    "sweetalert2": "^11.11.0",
+    "three": "^0.164.1",
+    "valtio": "^1.13.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

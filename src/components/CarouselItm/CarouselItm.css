@@ -1,0 +1,16 @@
+.add-border{
+    border-radius: 50px 50px 0px 0px ;
+    margin-top: 40px;
+}
+.desc-container{
+    background-color: rgba(252, 251, 251, 0.635);
+    border-radius: 25px;
+    height: 140px;
+    width: 160px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 800;
+}
+.add-container-borders{
+    border-radius: 20px;
+}

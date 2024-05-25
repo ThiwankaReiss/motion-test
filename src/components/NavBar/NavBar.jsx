@@ -29,7 +29,7 @@ export default function NavBar({ navButton }) {
     return (
 
         <>
-            <nav className="navbar navbar-expand-lg " style={{ backgroundColor: themeColor }}>
+            <nav className="navbar navbar-expand-lg " style={{ backgroundColor: themeColor,zIndex:880 }}>
                 <div className="container-fluid">
                     <button className="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>

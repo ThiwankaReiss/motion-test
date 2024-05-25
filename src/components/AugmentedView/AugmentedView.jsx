@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CanvasModel from '../../canvas/CanvasModel';
 import ARModel from '../../canvas/ARModel';
+import Draggable from 'react-draggable';
 
 const AugmentedView = () => {
     const videoRef = useRef(null);
@@ -93,19 +94,28 @@ const AugmentedView = () => {
     }, [isCameraEnabled]);
 
     return (
-        <div className='position-relative col-lg-8 col-md-8 col-sm-8 w-100' style={{ height: '445px' }}>
+        <div className='cam-window position-relative col-lg-8 col-md-8 col-sm-8 w-100' style={{ height: '445px' }}>
             <video
                 ref={videoRef}
                 className='position-absolute w-100 h-100'
                 style={{ top: 0, left: 0, objectFit: 'cover', overflow: 'hidden' }}
             />
+
             <canvas
                 ref={canvasRef}
                 style={{ display: 'none' }}
                 width={640}
                 height={480}
             />
-            <ARModel avgIntensity={avgIntensity} lightX={lightX} lightY={lightY} />
+            <Draggable>
+                <div className='h-100'>
+                    <ARModel avgIntensity={avgIntensity} lightX={lightX} lightY={lightY} />
+                </div>
+            </Draggable>
+
+
+
+
         </div>
     );
 };

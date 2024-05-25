@@ -6,7 +6,7 @@ const ImageCarousel = () => {
     const [activeImg, setActiveImage] = useState(1);
     const snap = useSnapshot(state);
     return (
-        <div className="container card mt-3" style={{backgroundColor:snap.themeColor}}>
+        <div className="container card mt-3" style={{backgroundColor:snap.themeColor,zIndex:999}}>
             <div className="row d-flex align-items-center justify-content-center">
                 <div className="col-11 mt-3 mb-3  card ">
 

@@ -4,7 +4,7 @@ import { useSnapshot } from 'valtio'
 import state from '../../store'
 import Aos from 'aos'
 import Motion from '../../components/Motion/Motion'
-
+import GravityAngleComponent from '../../canvas/GravityAngleComponent'
 const Products = () => {
   useEffect(()=>{
     Aos.init();
@@ -63,7 +63,7 @@ const Products = () => {
           </div>
 
         </div>
-        <Motion></Motion>
+        <GravityAngleComponent></GravityAngleComponent>
       </div>
     </div>
 

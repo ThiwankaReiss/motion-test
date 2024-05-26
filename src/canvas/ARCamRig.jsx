@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { easing } from 'maath';
-
+import axios from 'axios'
 const ARCamRig = ({ children, cameraCoordinates }) => {
   const group = useRef();
-  const [angle, setAngle] = useState([0, 0, 0]);
+  const [angle, setAngle] = useState([null, null, null]);
   const [count, setCount] = useState(1);
   const [isPortrait, setIsPortrait] = useState(true);
 
@@ -42,10 +42,19 @@ const ARCamRig = ({ children, cameraCoordinates }) => {
     // Smoothly interpolate the camera position and rotation
     easing.damp3(state.camera.position, targetPosition, 0.25, delta);
 
-    if (angle[0] === 0 && angle[1] === 0 && angle[2] === 0) {
-      if (count === 1) {
+    if ( angle[0] == null && angle[1] == null && angle[2] == null) {
+      if (count == 1) {
         alert('Your device has denied gyroscope access. Still augmented reality will be provided, hold your device up right for better experience.');
         setCount(2);
+        axios.get('http://localhost:8080/local')
+          .then(function (response) {
+            alert('Seems like you are running on localhost 8080 visit https://thiwankareiss.github.io/motion-test/ for better Augmented reality experience.')
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+
       }
 
       easing.dampE(
@@ -55,7 +64,9 @@ const ARCamRig = ({ children, cameraCoordinates }) => {
         delta
       );
     } else {
+
       if (isPortrait) {
+        console.log("c")
         easing.dampE(
           group.current.rotation,
           [Math.PI / 2 - Math.PI * (angle[1] / 180), -state.pointer.x / 0.8, Math.PI * (angle[2] / 180)],
@@ -63,6 +74,7 @@ const ARCamRig = ({ children, cameraCoordinates }) => {
           delta
         );
       } else {
+
         easing.dampE(
           group.current.rotation,
           [Math.PI / 2 + Math.PI * (angle[2] / 180), -state.pointer.x / 0.8, Math.PI * (angle[1] / 180)],

@@ -9,7 +9,7 @@ const GravityAngleComponent = () => {
 
       // Calculate the angle between the device and the direction of gravity
       // Here, we assume beta (front-to-back tilt in degrees) gives us the desired angle
-      const gravityAngle = Math.abs(beta);
+      const gravityAngle = [alpha,beta,gamma];
 
       setAngle(gravityAngle);
     };
@@ -25,7 +25,10 @@ const GravityAngleComponent = () => {
   return (
     <div>
       <h1>Angle with respect to gravity</h1>
-      <p>{angle.toFixed(2)} degrees</p>
+      <p>{angle[0]} degrees</p>
+      <p>{angle[1]} degrees</p>
+      <p>{angle[2]} degrees</p>
+
     </div>
   );
 };

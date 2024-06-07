@@ -11,7 +11,107 @@ import WoodenChair from '../../components/ThreeDModels/WoodenChair'
 import axios from 'axios'
 import SideBill from '../../components/SideBill/SideBill'
 const Products = () => {
-  const [geometries, setGeometries] = useState(null);
+  const [geometries, setGeometries] = useState([
+    {
+        "id": 1,
+        "price": 800.0,
+        "name": "Wooden Chair",
+        "type": "woodenChair",
+        "images": [],
+        "materials": [
+            {
+                "id": 1,
+                "modelId": 1,
+                "name": "Cussion",
+                "color": null,
+                "texture": 0,
+                "repeate": 20.0,
+                "visible": true
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "price": 800.0,
+        "name": "Office Tables",
+        "type": "officeTable",
+        "images": [],
+        "materials": [
+            {
+                "id": 2,
+                "modelId": 2,
+                "name": "TopCussion",
+                "color": null,
+                "texture": 0,
+                "repeate": 20.0,
+                "visible": true
+            },
+            {
+                "id": 3,
+                "modelId": 2,
+                "name": "BtmCussion",
+                "color": null,
+                "texture": 0,
+                "repeate": 20.0,
+                "visible": true
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "price": 850.0,
+        "name": "Sofa",
+        "type": "sofa",
+        "images": [],
+        "materials": [
+            {
+                "id": 4,
+                "modelId": 3,
+                "name": "Pillow",
+                "color": null,
+                "texture": 0,
+                "repeate": 20.0,
+                "visible": true
+            },
+            {
+                "id": 5,
+                "modelId": 3,
+                "name": "Seat",
+                "color": null,
+                "texture": 0,
+                "repeate": 20.0,
+                "visible": true
+            },
+            {
+                "id": 6,
+                "modelId": 3,
+                "name": "Frame",
+                "color": null,
+                "texture": 0,
+                "repeate": 20.0,
+                "visible": true
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "price": 850.0,
+        "name": "Picnic Table",
+        "type": "picnicTable",
+        "images": [],
+        "materials": [
+            {
+                "id": 7,
+                "modelId": 4,
+                "name": "Table",
+                "color": null,
+                "texture": 0,
+                "repeate": 20.0,
+                "visible": true
+            }
+        ]
+    }
+]);
 
   const handleAddToCart = (data) => {
     // Update the array by adding the new data
@@ -44,8 +144,8 @@ const Products = () => {
     const fetchData = async () => {
 
       try {
-        const response = await axios.get('http://localhost:8080/model');
-        setGeometries(response.data);
+        // const response = await axios.get('http://localhost:8080/model');
+        // setGeometries(response.data);
 
       } catch (error) {
 

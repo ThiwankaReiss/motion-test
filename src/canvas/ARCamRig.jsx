@@ -21,7 +21,7 @@ const ARCamRig = ({ children, cameraCoordinates }) => {
       if (gravityAngle[0] == null && gravityAngle[1] == null && gravityAngle[2] == null) {
 
         if(gyro==1){
-          alert('Your device has denied gyroscope access. Still augmented reality will be provided, hold your device up right for better experience.');
+          alert('Your device has denied gyroscope access. Still augmented reality will be provided, hold your device up right for better experience.visit https://thiwankareiss.github.io/motion-test/ for better Augmented reality experience.');
           setGyro(2);
         }
 

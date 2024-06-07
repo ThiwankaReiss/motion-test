@@ -2,3 +2,6 @@
     padding: 5px;
     margin-right: 3px;
 }
+.add-min-height{
+    min-height: 330px;
+}

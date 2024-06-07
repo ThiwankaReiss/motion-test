@@ -10,54 +10,62 @@ import Aos from 'aos'
 const Register = () => {
   const { handleSubmit, register, reset, formState: { errors } } = useForm();
   const navigate = useNavigate();
-  const [passMissMatch ,setPassMissMatch]=useState(false);
+  const [passMissMatch, setPassMissMatch] = useState(false);
   // const { setCustomer } = useCustomer();
   const snap = useSnapshot(state);
-  useEffect(()=>{
+
+  useEffect(() => {
     Aos.init();
-  },[]);
+  }, []);
   const submit = async (data) => {
-    console.log(data);
-    if(data.password != data.confirm){
+  
+    if (data.password != data.confirm) {
       setPassMissMatch(true);
-    }else{
+    } else {
       setPassMissMatch(false);
       Swal.fire('Please wait')
-    Swal.showLoading();
-    axios.post('http://localhost:8080/user', {
-      "email":data.email,
-      "password":data.password
-    })
-      .then(function (response) {
-        console.log(response.data);
-
-        if (response.data != null && response.data != '') {
-
-          state.customer = response.data;
-          state.navButton = 1;
-          Swal.fire({
-            title: "Sucess!",
-            text: "Registration Sucessfully!",
-            icon: "success"
-          });
-          Swal.hideLoading();
-
-          navigate('/')
-
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Failed!",
-            text: "Something went wrong",
-          });
-          Swal.hideLoading();
-        }
+      Swal.showLoading();
+      axios.post('http://localhost:8080/user', {
+        "email": data.email,
+        "password": data.password
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          
+
+          if (response.data != null && response.data != '') {
+
+            state.customer = response.data;
+
+            Swal.fire({
+              title: "Sucess!",
+              text: "Registration Sucessfully!",
+              icon: "success"
+            });
+            Swal.hideLoading();
+
+            if (snap.ckeckout) {
+              state.navButton = 0;
+              navigate('/motion-test/checkout')
+
+            } else {
+              state.navButton = 1;
+              navigate('/motion-test')
+            }
+
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Failed!",
+              text: "Something went wrong",
+            });
+            Swal.hideLoading();
+          }
+        })
+        .catch(function (error) {
+          
+        });
     }
-    
+
   }
 
 
@@ -72,9 +80,9 @@ const Register = () => {
               <div class="heading">Register</div>
               <form action="" class="form">
                 <input
-                  
+
                   required=""
-                  class="input"
+                  class="input2"
                   type="email"
                   name="email"
                   id="email"
@@ -84,9 +92,9 @@ const Register = () => {
                 {errors && errors.email && errors.email.type == "required" && (<p>Email cannot be empty</p>)}
                 {errors && errors.email && errors.email.type == "pattern" && (<p>Enter correct email</p>)}
                 <input
-                onFocus={()=>{setPassMissMatch(false)}}
+                  onFocus={() => { setPassMissMatch(false) }}
                   required=""
-                  class="input"
+                  class="input2"
                   type="password"
                   name="password"
                   id="password"
@@ -97,9 +105,9 @@ const Register = () => {
                 {errors && errors.password && (<p>Password cannot be empty</p>)}
 
                 <input
-                onFocus={()=>{setPassMissMatch(false)}}
+                  onFocus={() => { setPassMissMatch(false) }}
                   required=""
-                  class="input"
+                  class="input2"
                   type="password"
                   name="password"
                   id="password"
@@ -107,7 +115,7 @@ const Register = () => {
                   {...register("confirm", { required: true })}
                 />
                 {errors && errors.confirm && (<p>Reconfirm password</p>)}
-                {passMissMatch==true && (<p>Password doesn't Match</p>)}
+                {passMissMatch == true && (<p>Password doesn't Match</p>)}
                 <input onClick={handleSubmit(submit)} class="login-button" type="submit" value="Register" />
 
               </form>

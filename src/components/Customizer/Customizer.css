@@ -1,0 +1,37 @@
+.customizer-container{
+    height: 400px;
+}
+.canvas-container{
+    height: 400px;
+
+    background-color: rgb(187, 186, 186);
+}
+.submit-btn{
+    padding: 10px;
+    border-radius: 10px;
+    color:white;
+    border-color: aliceblue;
+    margin-right: 3%;
+}
+.model-container-2 {
+    height: 485px;
+    background-color: lightgray;
+    position: relative;
+    border-radius: 20px;
+}
+
+
+
+.buttons-container-2 {
+    position: absolute;
+    bottom: 40px;
+    right:30px;
+}
+
+.submit-btn-2{
+    padding: 10px;
+    border-radius: 10px;
+    color:white;
+    border-color: aliceblue;
+    margin-right: 5px;
+}

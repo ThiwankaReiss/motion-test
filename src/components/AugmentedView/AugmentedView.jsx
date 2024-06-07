@@ -2,19 +2,23 @@ import React, { useEffect, useRef, useState } from 'react';
 import CanvasModel from '../../canvas/CanvasModel';
 import ARModel from '../../canvas/ARModel';
 import Draggable from 'react-draggable';
-
+import Sorter from '../Sorters/Sorter';
+import state from '../../store'
+import { useSnapshot } from 'valtio';
 const AugmentedView = () => {
+    const snap = useSnapshot(state);
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const [isCameraEnabled, setIsCameraEnabled] = useState(false);
     const [avgIntensity, setAvgIntensity] = useState(1);
     const [lightX, setLightX] = useState(0);
     const [lightY, setLightY] = useState(0);
-    const [modelSize, setModelSize] = useState(20);
+    const [modelSize, setModelSize] = useState(50);
+
     function getValue(event) {
         const value = event.target.value;
         setModelSize(value);
-        console.log(value);
+        
     }
     useEffect(() => {
         const enableCamera = async () => {
@@ -26,6 +30,8 @@ const AugmentedView = () => {
                     videoRef.current.play();
                     setIsCameraEnabled(true);
                 }
+
+                
             } catch (error) {
                 console.error('Error accessing the back camera, trying the front camera', error);
                 try {
@@ -36,6 +42,7 @@ const AugmentedView = () => {
                         videoRef.current.play();
                         setIsCameraEnabled(true);
                     }
+                    
                 } catch (error) {
                     console.error('Error accessing the front camera', error);
                 }
@@ -101,7 +108,7 @@ const AugmentedView = () => {
     return (
 
         <>
-            <div className='cam-window position-relative col-lg-8 col-md-8 col-sm-8 w-100' style={{ height: '445px', overflow:'hidden' }}>
+            <div className='cam-window position-relative col-lg-8 col-md-8 col-sm-8 w-100' style={{ height: '445px', overflow: 'hidden' }}>
                 <video
                     ref={videoRef}
                     className='position-absolute w-100 h-100'
@@ -114,13 +121,12 @@ const AugmentedView = () => {
                     width={640}
                     height={480}
                 />
-                <Draggable>
+               <Draggable>
                     <div className='h-100'>
-                        <ARModel avgIntensity={avgIntensity} lightX={lightX} lightY={lightY} modelSize={modelSize} />
+                        <Sorter geos={snap.geometry.materials} model={snap.geometry.type} augmented={"augmented"} avgIntensity={avgIntensity} lightX={lightX} lightY={lightY} modelSize={modelSize}></Sorter>
                     </div>
                 </Draggable>
-
-
+                
 
             </div>
             <form>

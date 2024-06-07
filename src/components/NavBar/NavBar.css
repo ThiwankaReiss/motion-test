@@ -19,6 +19,7 @@
     border-radius: 50%;
     background-image: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 253, 0.25), rgb(255, 255, 255,0.125));
     box-shadow:  0px 0px 3px 3px  rgba(255, 255, 253, 0.125);
+   
   }
   .itm-link {
     position: relative;

@@ -4,9 +4,13 @@ import { Environment, Center, RandomizedLight } from '@react-three/drei'
 import CameraRig from './CameraRig'
 
 import Backdrop from './Backdrop.jsx'
-import Chair from './Chair.jsx'
 
-const CanvasModel = () => {
+import Sofa from '../components/ThreeDModels/Sofa.jsx'
+import OficeTable from '../components/ThreeDModels/OficeTable.jsx'
+import PicnicTable from '../components/ThreeDModels/PicnicTable.jsx'
+import WoodenChair from '../components/ThreeDModels/WoodenChair.jsx'
+
+const CanvasModel = ({ model ,geos,imgArray}) => {
     return (
 
         <Canvas
@@ -16,19 +20,30 @@ const CanvasModel = () => {
 
         >
             <ambientLight intensity={0.3} position={[0, 0, -10]} />
-           
+
 
             <Environment preset='city' />
-        
-            <CameraRig cameraCordinates={[0, 0, 20]}>
-                <Backdrop></Backdrop>
-               
+
+            <CameraRig cameraCordinates={[0, 0, 50]}>
+
+                
                 <Center>
-
-                    <Chair></Chair>
-
-
+                    
+                    {model && model == "sofa" && (
+                        <Sofa geos={geos} imgArray={imgArray}></Sofa>
+                    )}
+                    {model && model == "officeTable" && (
+                        <OficeTable geos={geos} imgArray={imgArray}></OficeTable>
+                    )}
+                    {model && model == "picnicTable" && (
+                        <PicnicTable geos={geos} imgArray={imgArray}></PicnicTable>
+                    )}
+                    {model && model == "woodenChair" && (
+                        <WoodenChair geos={geos} imgArray={imgArray}></WoodenChair>
+                    )}
+                    {/* <Sofa></Sofa> */}
                 </Center>
+                <Backdrop></Backdrop>
             </CameraRig>
 
         </Canvas>

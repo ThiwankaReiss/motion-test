@@ -1,25 +1,85 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import CarouselItm from '../../components/CarouselItm/CarouselItm'
 import { useSnapshot } from 'valtio'
 import state from '../../store'
 import Aos from 'aos'
-import Motion from '../../components/Motion/Motion'
-import GravityAngleComponent from '../../canvas/GravityAngleComponent'
+import CanvasModel from '../../canvas/CanvasModel'
+import Sorter from '../../components/Sorters/Sorter'
+import './Products.css'
+import { useNavigate } from 'react-router-dom'
+import WoodenChair from '../../components/ThreeDModels/WoodenChair'
+import axios from 'axios'
+import SideBill from '../../components/SideBill/SideBill'
 const Products = () => {
-  useEffect(()=>{
+  const [geometries, setGeometries] = useState(null);
+
+  const handleAddToCart = (data) => {
+    // Update the array by adding the new data
+    var isPresent = false;
+    for (let index = 0; index < snap.orderDetail.length; index++) {
+      if (snap.orderDetail[index].product.id == data.id) {
+        isPresent = true;
+
+        const newArray = [...snap.orderDetail];
+        newArray[index] = {
+          ...newArray[index],
+          amount: snap.orderDetail[index].amount + 1
+        };
+        state.orderDetail = newArray;
+      }
+
+    }
+
+    if (!isPresent) {
+      state.orderDetail = [...snap.orderDetail, {
+        amount: 1,
+        price: data.price,
+        product: data
+      }];
+    }
+
+  };
+  useEffect(() => {
     Aos.init();
-  },[]);
+    const fetchData = async () => {
+
+      try {
+        const response = await axios.get('http://localhost:8080/model');
+        setGeometries(response.data);
+
+      } catch (error) {
+
+      }
+
+    }
+
+    fetchData();
+  }, []);
   const snap = useSnapshot(state);
+  const navigate = useNavigate();
+  const handleEdit = (data) => {
+    state.geometry = data;
+    state.navButton = 5;
+    navigate('/motion-test/customizer')
+  }
+  const handleView = (data) => {
+    state.geometry = data;
+    state.navButton = 4;
+    navigate('/motion-test/details')
+  }
+
+
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-lg-5 d-flex align-items-center justify-content-center">
           <p>
-            <h1 data-aos="fade-down-right" data-aos-duration="1000" className='text-center' style={{color:snap.themeColor}}>Welcome to Thiwanka Reiss Show room</h1>
+            <h1 data-aos="fade-down-right" data-aos-duration="1000" className='text-center' style={{ color: snap.themeColor }}>Welcome to Thiwanka Reiss Show room</h1>
             <br></br>
             <h5 data-aos="fade-up" data-aos-duration="2000">Hope you have an inovative and enjoyable experience with us</h5>
           </p>
-
+  
         </div>
         <div className="col-lg-7">
           <div data-aos="zoom-in" data-aos-duration="3000" id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -63,8 +123,40 @@ const Products = () => {
           </div>
 
         </div>
-        <GravityAngleComponent></GravityAngleComponent>
+
       </div>
+      <div className="row d-flex justify-content-center">
+
+        {geometries && geometries.map((data) => (
+          <div className="col-lg-3 m-3 model-container" style={{ border: `2px solid ${snap.themeColor}` }}>
+            <Sorter model={data.type} geos={data.materials}></Sorter>
+            <div style={{ position: 'absolute', top: '5%', right: '60%', color: snap.themeColor }} className='desc-container-2 d-flex align-items-center justify-content-center'>
+              Rs.{data.price}/=
+            </div>
+            <div style={{ position: 'absolute', top: '83%', right: '60%', color: snap.themeColor }} className='d-flex align-items-center justify-content-center'>
+              {data.name}
+            </div>
+            <div className='buttons-container'>
+              {snap.customer && (snap.customer.status == "admin" || snap.customer.status == "employee") && (
+                <button className='btn btn-sm btn-outline-warning m-1' onClick={() => { handleEdit(data) }}><i class="bi bi-pen"></i></button>
+              )}
+              <button className='btn btn-sm btn-outline-success m-1' onClick={() => { handleView(data) }}><i class="bi bi-eye-fill"></i></button>
+              <button className='btn btn-sm btn-outline-info m-1' onClick={() => { handleAddToCart(data) }}><i class="bi bi-cart-dash"></i></button>
+            </div>
+          </div>
+        ))}
+        <div className='col-lg-12 col-md-3 col-sm-10  mb-3'  >
+          {state.orderDetail.length > 0 &&
+            <div className='bill-container' style={{ border: `2px solid ${snap.themeColor}` }}>
+              <SideBill />
+            </div>
+          }
+
+        </div>
+
+      </div>
+
+
     </div>
 
   )
